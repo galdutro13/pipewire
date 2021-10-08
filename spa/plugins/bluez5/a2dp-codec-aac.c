@@ -36,7 +36,7 @@
 #include "a2dp-codecs.h"
 
 #define DEFAULT_AAC_BITRATE	320000
-#define MIN_AAC_BITRATE		64000
+#define MIN_AAC_BITRATE		32000
 
 struct props {
 	int bitratemode;
@@ -297,7 +297,11 @@ static void *codec_init(const struct a2dp_codec *codec, uint32_t flags,
 		res = -EINVAL;
 		goto error;
 	}
-	res = aacEncoder_SetParam(this->aacenc, AACENC_AOT, AOT_AAC_LC);
+
+	if(!(this->cur_bitrate > 64000 || (bitratemode > 2 || bitratemode == 0)))
+	    res = aacEncoder_SetParam(this->aacenc, AACENC_AOT, AOT_SBR);
+	else
+	    res = aacEncoder_SetParam(this->aacenc, AACENC_AOT, AOT_AAC_LC);
 	if (res != AACENC_OK)
 		goto error;
 
