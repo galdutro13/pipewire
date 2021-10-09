@@ -124,7 +124,7 @@ static int get_valid_aac_bitrate(a2dp_aac_t *conf)
 		/* Unknown (0) or bogus bitrate */
 		return MIDDLE_OF_THE_ROAD;
 	} else {
-	    return SPA_MAX(AAC_GET_BITRATE(*conf), DEFAULT_AAC_BITRATE);
+	    return SPA_MIN(AAC_GET_BITRATE(*conf), DEFAULT_AAC_BITRATE);
 	}
 }
 
