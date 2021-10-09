@@ -35,8 +35,9 @@
 #include "rtp.h"
 #include "a2dp-codecs.h"
 
+#define MAX_AAC_BITRATE     320000
 #define DEFAULT_AAC_BITRATE	256000
-#define MIDDLE_OF_THE_ROAD  180000 /*   (2*DEFAULT + 1*MIN)/3   */
+#define MIDDLE_OF_THE_ROAD  104000 /*   (1*DEFAULT + 2*MIN)/3   */
 #define MIN_AAC_BITRATE		28000
 
 struct props {
@@ -116,7 +117,10 @@ aac_channel_modes[] = {
 
 static int get_valid_aac_bitrate(a2dp_aac_t *conf)
 {
-	if (AAC_GET_BITRATE(*conf) < MIN_AAC_BITRATE) {
+    if(AAC_GET_BITRATE(*conf) > MAX_AAC_BITRATE){
+
+        return DEFAULT_AAC_BITRATE;
+    }else if (AAC_GET_BITRATE(*conf) < MIN_AAC_BITRATE) {
 		/* Unknown (0) or bogus bitrate */
 		return MIDDLE_OF_THE_ROAD;
 	} else {
