@@ -37,7 +37,7 @@
 
 #define MAX_AAC_BITRATE     320000
 #define DEFAULT_AAC_BITRATE	256000
-#define MIDDLE_OF_THE_ROAD  104000 /*   (1*DEFAULT + 2*MIN)/3   */
+#define MIDDLE_OF_THE_ROAD  132000  /*   (1*MAX + 1*DEFAULT + 3*MIN)/5   */
 #define MIN_AAC_BITRATE		28000
 
 struct props {
