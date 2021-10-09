@@ -487,7 +487,7 @@ static int codec_change_bitrate(struct impl *this, int new_bitrate)
 static int codec_reduce_bitpool(void *data)
 {
 	struct impl *this = data;
-	return codec_change_bitrate(this, (this->cur_bitrate * 2) / 3);
+	return codec_change_bitrate(this, (this->cur_bitrate * 6) / 10);
 }
 
 static int codec_increase_bitpool(void *data)
