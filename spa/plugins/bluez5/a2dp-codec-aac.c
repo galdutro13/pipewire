@@ -36,7 +36,7 @@
 #include "a2dp-codecs.h"
 
 #define DEFAULT_AAC_BITRATE	256000
-#define MIDDLE_OF_THE_ROAD  104000 /*   (1*DEFAULT + 2*MIN)/3   */
+#define MIDDLE_OF_THE_ROAD  180000 /*   (2*DEFAULT + 1*MIN)/3   */
 #define MIN_AAC_BITRATE		28000
 
 struct props {
@@ -120,7 +120,7 @@ static int get_valid_aac_bitrate(a2dp_aac_t *conf)
 		/* Unknown (0) or bogus bitrate */
 		return MIDDLE_OF_THE_ROAD;
 	} else {
-		return SPA_MIN(AAC_GET_BITRATE(*conf), DEFAULT_AAC_BITRATE);
+	    return SPA_MAX(AAC_GET_BITRATE(*conf), DEFAULT_AAC_BITRATE);
 	}
 }
 
